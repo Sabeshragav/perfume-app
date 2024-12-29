@@ -3,7 +3,7 @@ import axios from "axios";
 import Header from "../Components/Header";
 import Banner from "../Components/Banner";
 import ProductGrid from "../Components/ProductGrid";
-
+import Footer from "../Components/Footer";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -16,10 +16,11 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="fade-in">
       <Header />
       <Banner />
       <ProductGrid products={products} />
+      <Footer />
     </div>
   );
 };
