@@ -40,7 +40,12 @@ const ProductGrid = ({ products }) => {
   const location = useLocation();
   useEffect(() => {
     if (location.hash === "#productGrid") {
-      productRef.current.scrollIntoView({ behavior: "smooth" });
+      const element = productRef.current;
+      const offsetTop = element.offsetTop - 100; // Adjust for the margin
+      window.scrollTo({
+        top: offsetTop,
+        behavior: "smooth",
+      });
     }
   }, [location]);
 
@@ -48,7 +53,6 @@ const ProductGrid = ({ products }) => {
     <div className="container mx-auto py-10 px-4">
       <h2
         ref={productRef}
-        id="productGrid"
         className="text-3xl font-bold text-center mb-8 text-purple-800"
       >
         Our Exquisite Collections

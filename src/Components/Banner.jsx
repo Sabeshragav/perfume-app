@@ -45,7 +45,7 @@ const Banner = () => (
         {brands.map((brand, index) => (
           <span
             key={index}
-            className={`${fontStyles[index % fontStyles.length]} mr-6`}
+            className={`${fontStyles[index % fontStyles.length]} mr-10`}
           >
             {brand}
           </span>
