@@ -4,6 +4,7 @@ import Header from "../Components/Header";
 import Banner from "../Components/Banner";
 import ProductGrid from "../Components/ProductGrid";
 import Footer from "../Components/Footer";
+import SwipeBanner from "../Components/SwipeBanner";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -19,6 +20,7 @@ const Home = () => {
     <div className="fade-in">
       <Header />
       <Banner />
+      <SwipeBanner />
       <ProductGrid products={products} />
       <Footer />
     </div>
