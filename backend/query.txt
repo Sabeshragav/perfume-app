@@ -1,0 +1,113 @@
+db.products.insertMany([
+  {
+    "name": "Floral Bliss",
+    "description": "A delicate blend of blooming flowers with a touch of sweetness.",
+    "price": 49.99,
+    "sizes": ["50ml", "100ml"],
+    "images": ["/assets/1.jpg", "/assets/2.jpg"],
+    "rating": 4.5,
+    "madeFrom": "Jasmine, Rose, Vanilla",
+    "category": "Perfume",
+    "brand": "Floral Essence"
+  },
+  {
+    "name": "Ocean Breeze",
+    "description": "A fresh aquatic scent reminiscent of the sea.",
+    "price": 59.99,
+    "sizes": ["50ml", "100ml", "150ml"],
+    "images": ["/assets/3.jpg", "/assets/4.jpg"],
+    "rating": 4.7,
+    "madeFrom": "Sea Breeze, Citrus",
+    "category": "Perfume",
+    "brand": "Oceanic"
+  },
+  {
+    "name": "Amber Glow",
+    "description": "A warm, rich fragrance with hints of amber and vanilla.",
+    "price": 69.99,
+    "sizes": ["50ml", "100ml"],
+    "images": ["/assets/5.jpg", "/assets/6.jpg"],
+    "rating": 4.8,
+    "madeFrom": "Amber, Vanilla, Musk",
+    "category": "Perfume",
+    "brand": "Glow Essence"
+  },
+  {
+    "name": "Citrus Spark",
+    "description": "A vibrant citrus fragrance with a zesty kick.",
+    "price": 44.99,
+    "sizes": ["30ml", "50ml"],
+    "images": ["/assets/7.jpg", "/assets/8.jpg"],
+    "rating": 4.3,
+    "madeFrom": "Lemon, Orange, Bergamot",
+    "category": "Perfume",
+    "brand": "Citrus Co."
+  },
+  {
+    "name": "Mystic Woods",
+    "description": "An earthy, woody aroma with a touch of mystery.",
+    "price": 74.99,
+    "sizes": ["100ml", "150ml"],
+    "images": ["/assets/9.jpg", "/assets/10.jpg", "/assets/11.jpg"],
+    "rating": 4.6,
+    "madeFrom": "Sandalwood, Cedar, Musk",
+    "category": "Perfume",
+    "brand": "Wood Essence"
+  },
+  {
+    "name": "Lavender Dream",
+    "description": "A calming blend of lavender and vanilla.",
+    "price": 39.99,
+    "sizes": ["50ml", "100ml"],
+    "images": ["/assets/12.jpg", "/assets/13.jpg", "/assets/14.jpg"],
+    "rating": 4.7,
+    "madeFrom": "Lavender, Vanilla",
+    "category": "Perfume",
+    "brand": "Lavender Love"
+  },
+  {
+    "name": "Tropical Rain",
+    "description": "A refreshing tropical scent with hints of rain.",
+    "price": 54.99,
+    "sizes": ["50ml", "100ml"],
+    "images": ["/assets/15.jpg", "/assets/16.jpg", "/assets/17.jpg"],
+    "rating": 4.4,
+    "madeFrom": "Pineapple, Coconut, Rainwater",
+    "category": "Perfume",
+    "brand": "Tropical Breeze"
+  },
+  {
+    "name": "Sweet Bouquet",
+    "description": "A sweet floral fragrance with a mix of roses and jasmine.",
+    "price": 59.99,
+    "sizes": ["50ml", "100ml"],
+    "images": ["/assets/1.jpg", "/assets/2.jpg", "/assets/3.jpg"],
+    "rating": 4.5,
+    "madeFrom": "Rose, Jasmine, Sweet Notes",
+    "category": "Perfume",
+    "brand": "Sweet Bloom"
+  },
+  {
+    "name": "Autumn Spice",
+    "description": "A cozy, warm scent with hints of cinnamon and clove.",
+    "price": 49.99,
+    "sizes": ["30ml", "50ml"],
+    "images": ["/assets/4.jpg", "/assets/5.jpg", "/assets/6.jpg"],
+    "rating": 4.6,
+    "madeFrom": "Cinnamon, Clove, Nutmeg",
+    "category": "Perfume",
+    "brand": "Spicy Essence"
+  },
+  {
+    "name": "Fresh Breeze",
+    "description": "A clean, refreshing fragrance with citrus and mint.",
+    "price": 44.99,
+    "sizes": ["50ml", "100ml"],
+    "images": ["/assets/7.jpg", "/assets/8.jpg", "/assets/9.jpg"],
+    "rating": 4.4,
+    "madeFrom": "Citrus, Mint",
+    "category": "Perfume",
+    "brand": "Breeze Co."
+  }
+]
+)
