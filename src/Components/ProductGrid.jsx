@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const ProductGrid = ({ products }) => {
   const [inView, setInView] = useState(new Array(products.length).fill(false));
@@ -36,10 +36,22 @@ const ProductGrid = ({ products }) => {
     return () => observer.disconnect();
   }, [products]);
 
+  const productRef = useRef(null);
+  const location = useLocation();
+  useEffect(() => {
+    if (location.hash === "#productGrid") {
+      productRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [location]);
+
   return (
     <div className="container mx-auto py-10 px-4">
-      <h2 className="text-3xl font-bold text-center mb-8 text-purple-800">
-        Our Exquisite Collection
+      <h2
+        ref={productRef}
+        id="productGrid"
+        className="text-3xl font-bold text-center mb-8 text-purple-800"
+      >
+        Our Exquisite Collections
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {products.map((product, index) => (

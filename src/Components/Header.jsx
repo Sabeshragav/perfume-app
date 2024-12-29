@@ -21,9 +21,9 @@ const Header = () => {
             <nav className="hidden md:block ml-10">
               <ul className="flex items-baseline space-x-4">
                 <NavLink to="/">Home</NavLink>
-                <NavLink to="/collections">Collections</NavLink>
-                <NavLink to="/about">About Us</NavLink>
-                <NavLink to="/contact">Contact</NavLink>
+                <NavLink to="/">Collections</NavLink>
+                <NavLink to="/">About Us</NavLink>
+                <NavLink to="/">Contact</NavLink>
               </ul>
             </nav>
           </div>
@@ -113,7 +113,7 @@ const SearchBar = () => (
 
 const CartIcon = () => (
   <Link
-    to="/cart"
+    to="/"
     className="ml-4 text-white hover:text-purple-200 transition-colors"
   >
     <svg
