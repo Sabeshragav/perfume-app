@@ -212,9 +212,14 @@
 }
 
 .product-item {
-  animation: fadeInUp 0.5s ease-out forwards;
+  animation: fadeInUp 0s ease-out forwards;
 }
 
 .product-item.in-view {
+  animation-delay: 0ms;
   opacity: 1;
+}
+
+.product-item:not(.in-view) {
+  opacity: 0;
 }
