@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
+// eslint-disable-next-line
 import { Star, Share2, ShoppingBag } from 'lucide-react';
+
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -16,8 +18,8 @@ const ProductPage = () => {
     const fetchProductData = async () => {
       try {
         const [productResponse, reviewsResponse] = await Promise.all([
-          axios.get(`http://localhost:5000/products/${id}`),
-          axios.get(`http://localhost:5000/reviews/${id}`)
+          axios.get(`${process.env.REACT_APP_API_BASE_URL}/products/${id}`),
+          axios.get(`${process.env.REACT_APP_API_BASE_URL}/reviews/${id}`)
         ]);
         setProduct(productResponse.data);
         setReviews(reviewsResponse.data);
@@ -25,9 +27,10 @@ const ProductPage = () => {
         console.error("Error fetching data:", error);
       }
     };
-
+  
     fetchProductData();
   }, [id]);
+  
 
   if (!product) return (
     <div className="flex items-center justify-center h-screen">
