@@ -10,11 +10,13 @@ const ProductPage = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
+    // Fetch product data by product id
     axios
       .get(`http://localhost:5000/products/${id}`)
       .then((response) => setProduct(response.data))
       .catch((error) => console.error("Error fetching product:", error));
 
+    // Fetch reviews for the product by product id
     axios
       .get(`http://localhost:5000/reviews/${id}`)
       .then((response) => setReviews(response.data))
