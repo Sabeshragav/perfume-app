@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 const SwipeBanner = () => {
-  const img1 = "./assets/1.jpg";
-  const img2 = "./assets/2.jpg";
-  const img3 = "./assets/3.jpg";
+  const img1 = "./assets/banner1.jpg";
+  const img2 = "./assets/banner2.jpg";
+  const img3 = "./assets/banner3.jpg";
   const video = "./assets/banner4.mp4";
   const [currentIndex, setCurrentIndex] = useState(0);
   const [startX, setStartX] = useState(0); // Start position for touch
