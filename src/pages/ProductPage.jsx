@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-// eslint-disable-next-line
-import { Star, Share2, ShoppingBag } from 'lucide-react';
-
+import { Star, Share2, ShoppingBag } from "lucide-react";
+import ReviewForm from "../Components/ReviewForm";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -13,30 +12,42 @@ const ProductPage = () => {
   const [reviews, setReviews] = useState([]);
   const [activeImage, setActiveImage] = useState(0);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const fetchProductData = useCallback(async () => {
+    try {
+      const [productResponse, reviewsResponse] = await Promise.all([
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/products/${id}`),
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/reviews/${id}`),
+      ]);
+      setProduct(productResponse.data);
+      setReviews(reviewsResponse.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, [id]);
 
   useEffect(() => {
-    const fetchProductData = async () => {
-      try {
-        const [productResponse, reviewsResponse] = await Promise.all([
-          axios.get(`${process.env.REACT_APP_API_BASE_URL}/products/${id}`),
-          axios.get(`${process.env.REACT_APP_API_BASE_URL}/reviews/${id}`)
-        ]);
-        setProduct(productResponse.data);
-        setReviews(reviewsResponse.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-  
     fetchProductData();
-  }, [id]);
-  
+  }, [fetchProductData]);
 
-  if (!product) return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
-    </div>
-  );
+  const handleAddReview = (product) => {
+    setSelectedProduct(product);
+    setShowReviewForm(true);
+  };
+
+  const handleReviewSubmit = () => {
+    setShowReviewForm(false);
+    fetchProductData(); // Refresh product data (reviews included)
+  };
+
+  if (!product)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
+      </div>
+    );
 
   const truncateDescription = (text, maxLength) => {
     if (text.length <= maxLength) return text;
@@ -46,7 +57,6 @@ const ProductPage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Header />
-
       <main className="container mx-auto py-10 px-4 flex-grow">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Section: Product Images */}
@@ -68,7 +78,9 @@ const ProductPage = () => {
                   src={image}
                   alt={`${product.name} ${index + 1}`}
                   className={`w-20 h-20 object-cover rounded-md cursor-pointer transition-opacity ${
-                    index === activeImage ? 'border-2 border-purple-500' : 'opacity-60 hover:opacity-100'
+                    index === activeImage
+                      ? "border-2 border-purple-500"
+                      : "opacity-60 hover:opacity-100"
                   }`}
                   onClick={() => setActiveImage(index)}
                 />
@@ -82,26 +94,47 @@ const ProductPage = () => {
             <div className="flex items-center space-x-2">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`w-5 h-5 ${i < Math.round(product.rating) ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" />
+                  <Star
+                    key={i}
+                    className={`w-5 h-5 ${
+                      i < Math.round(product.rating)
+                        ? "text-yellow-400"
+                        : "text-gray-300"
+                    }`}
+                    fill="currentColor"
+                  />
                 ))}
               </div>
-              <span className="text-gray-600">({product.rating.toFixed(1)})</span>
+              <span className="text-gray-600">
+                ({product.rating.toFixed(1)})
+              </span>
             </div>
-            <p className="text-2xl font-bold text-purple-600">${product.price.toFixed(2)}</p>
+            <p className="text-2xl font-bold text-purple-600">
+              ${product.price.toFixed(2)}
+            </p>
             <div>
-              <p className="text-gray-700 mb-2">{truncateDescription(product.description, 150)}</p>
+              <p className="text-gray-700 mb-2">
+                {truncateDescription(product.description, 150)}
+              </p>
               {product.description.length > 150 && (
                 <button
                   className="text-purple-600 hover:text-purple-800 transition-colors"
-                  onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
+                  onClick={() =>
+                    setIsDescriptionExpanded(!isDescriptionExpanded)
+                  }
                 >
-                  {isDescriptionExpanded ? 'Read less' : 'Read more'}
+                  {isDescriptionExpanded ? "Read less" : "Read more"}
                 </button>
               )}
             </div>
             <div className="space-y-2">
-              <p className="text-gray-700"><span className="font-semibold">Made from:</span> {product.madeFrom}</p>
-              <p className="text-gray-700"><span className="font-semibold">Brand:</span> {product.brand}</p>
+              <p className="text-gray-700">
+                <span className="font-semibold">Made from:</span>{" "}
+                {product.madeFrom}
+              </p>
+              <p className="text-gray-700">
+                <span className="font-semibold">Brand:</span> {product.brand}
+              </p>
             </div>
             <button className="w-full bg-purple-600 text-white px-6 py-3 rounded-full hover:bg-purple-700 transition-colors flex items-center justify-center space-x-2">
               <ShoppingBag className="w-5 h-5" />
@@ -112,20 +145,45 @@ const ProductPage = () => {
 
         {/* Reviews Section */}
         <section className="mt-16">
-          <h2 className="text-3xl font-bold mb-6 text-gray-800">Customer Reviews</h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-3xl font-bold text-gray-800">
+              Customer Reviews
+            </h2>
+            <button
+              onClick={() => handleAddReview(product)}
+              className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors duration-300"
+            >
+              Add Review
+            </button>
+          </div>
           {reviews.length > 0 ? (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {reviews.map((review) => (
-                <div key={review._id} className="bg-white p-6 rounded-lg shadow-md transition-transform hover:scale-105">
+                <div
+                  key={review._id}
+                  className="bg-white p-6 rounded-lg shadow-md transition-transform hover:scale-105"
+                >
                   <div className="flex items-center mb-4">
                     <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                      <span className="text-purple-600 font-semibold">{review.username[0].toUpperCase()}</span>
+                      <span className="text-purple-600 font-semibold">
+                        {review.username[0].toUpperCase()}
+                      </span>
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-800">{review.username}</p>
+                      <p className="font-semibold text-gray-800">
+                        {review.username}
+                      </p>
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" />
+                          <Star
+                            key={i}
+                            className={`w-4 h-4 ${
+                              i < review.rating
+                                ? "text-yellow-400"
+                                : "text-gray-300"
+                            }`}
+                            fill="currentColor"
+                          />
                         ))}
                       </div>
                     </div>
@@ -135,11 +193,20 @@ const ProductPage = () => {
               ))}
             </div>
           ) : (
-            <p className="text-gray-600 text-center py-8">No reviews yet. Be the first to review this product!</p>
+            <p className="text-gray-600 text-center py-8">
+              No reviews yet. Be the first to review this product!
+            </p>
           )}
         </section>
-      </main>
 
+        {showReviewForm && selectedProduct && (
+          <ReviewForm
+            productId={selectedProduct._id}
+            onClose={handleReviewSubmit}
+            setShowReviewForm={setShowReviewForm}
+          />
+        )}
+      </main>
       <Footer />
     </div>
   );
