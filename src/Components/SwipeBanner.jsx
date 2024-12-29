@@ -4,7 +4,6 @@ const SwipeBanner = () => {
   const img1 = "./assets/banner1.jpg";
   const img2 = "./assets/banner2.jpg";
   const img3 = "./assets/banner3.jpg";
-  const video = "./assets/banner4.mp4";
   const [currentIndex, setCurrentIndex] = useState(0);
   const [startX, setStartX] = useState(0); // Start position for touch
   const [isDragging, setIsDragging] = useState(false); // To detect dragging state
@@ -12,7 +11,6 @@ const SwipeBanner = () => {
     { type: "image", src: img1 },
     { type: "image", src: img2 },
     { type: "image", src: img3 },
-    { type: "video", src: video },
   ];
   const active = "bg-black";
   const inActive = "bg-gray-300";
@@ -72,28 +70,11 @@ const SwipeBanner = () => {
               className="w-full h-full px-2 flex-shrink-0 rounded-lg overflow-hidden"
               style={{ flexBasis: "100%" }}
             >
-              {media.type === "image" ? (
-                <img
-                  src={media.src}
-                  alt={`banner-${index}`}
-                  className="w-full h-full object-cover rounded-lg"
-                />
-              ) : (
-                <video
-                  src={media.src}
-                  className="w-full h-full object-cover rounded-lg"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  disablePictureInPicture
-                  controls={false}
-                  onContextMenu={(e) => e.preventDefault()}
-                  onPlay={(e) => {
-                    e.target.muted = true;
-                  }}
-                />
-              )}
+              <img
+                src={media.src}
+                alt={`banner-${index}`}
+                className="w-full h-full object-cover rounded-lg"
+              />
             </div>
           ))}
         </div>
