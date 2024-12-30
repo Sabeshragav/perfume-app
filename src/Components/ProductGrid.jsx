@@ -47,7 +47,7 @@ const ProductGrid = ({ products }) => {
               inView[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
             style={{
-              transitionDelay: `${index * 1}ms`,
+              transitionDelay: `${index * 30}ms`,
             }}
           >
             <div className="relative">

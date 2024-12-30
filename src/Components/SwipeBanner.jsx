@@ -45,7 +45,6 @@ const SwipeBanner = () => {
       setIsDragging(false); // Prevent further updates until touch ends
     }
   };
-
   const handleTouchEnd = () => {
     setIsDragging(false);
   };
