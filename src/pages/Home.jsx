@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "../Components/Header";
 import Banner from "../Components/Banner";
 import ProductGrid from "../Components/ProductGrid";
 
 import SwipeBanner from "../Components/SwipeBanner";
-import Footer from "../Components/Footer";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -19,11 +17,9 @@ const Home = () => {
 
   return (
     <div className="fade-in">
-      <Header />
       <Banner />
       <SwipeBanner />
       <ProductGrid products={products} />
-      <Footer />
     </div>
   );
 };

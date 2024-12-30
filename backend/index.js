@@ -29,16 +29,14 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-// Models
-const Product = require("./models/Product");
-const Review = require("./models/Review");
-
 // Routes
 const productRoutes = require("./routes/productRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 
 app.use("/products", productRoutes);
 app.use("/reviews", reviewRoutes);
+app.use("/contact", contactRoutes);
 
 // Server
 const PORT = process.env.PORT || 5000;

@@ -7,7 +7,7 @@ db.products.insertMany([
     "images": ["/assets/1.jpg", "/assets/2.jpg"],
     "rating": 4.5,
     "madeFrom": "Jasmine, Rose, Vanilla",
-    "category": "Perfume",
+    "collections":0,
     "brand": "Floral Essence"
   },
   {
@@ -18,7 +18,7 @@ db.products.insertMany([
     "images": ["/assets/3.jpg", "/assets/4.jpg"],
     "rating": 4.7,
     "madeFrom": "Sea Breeze, Citrus",
-    "category": "Perfume",
+    "collections":1,
     "brand": "Oceanic"
   },
   {
@@ -29,7 +29,7 @@ db.products.insertMany([
     "images": ["/assets/5.jpg", "/assets/6.jpg"],
     "rating": 4.8,
     "madeFrom": "Amber, Vanilla, Musk",
-    "category": "Perfume",
+    "collections":2,
     "brand": "Glow Essence"
   },
   {
@@ -40,7 +40,7 @@ db.products.insertMany([
     "images": ["/assets/7.jpg", "/assets/8.jpg"],
     "rating": 4.3,
     "madeFrom": "Lemon, Orange, Bergamot",
-    "category": "Perfume",
+    "collections":3,
     "brand": "Citrus Co."
   },
   {
@@ -51,7 +51,7 @@ db.products.insertMany([
     "images": ["/assets/9.jpg", "/assets/10.jpg", "/assets/11.jpg"],
     "rating": 4.6,
     "madeFrom": "Sandalwood, Cedar, Musk",
-    "category": "Perfume",
+    "collections":4,
     "brand": "Wood Essence"
   },
   {
@@ -62,7 +62,7 @@ db.products.insertMany([
     "images": ["/assets/12.jpg", "/assets/13.jpg", "/assets/14.jpg"],
     "rating": 4.7,
     "madeFrom": "Lavender, Vanilla",
-    "category": "Perfume",
+    "collections":0,
     "brand": "Lavender Love"
   },
   {
@@ -73,7 +73,7 @@ db.products.insertMany([
     "images": ["/assets/15.jpg", "/assets/16.jpg", "/assets/17.jpg"],
     "rating": 4.4,
     "madeFrom": "Pineapple, Coconut, Rainwater",
-    "category": "Perfume",
+    "collections":1,
     "brand": "Tropical Breeze"
   },
   {
@@ -84,7 +84,7 @@ db.products.insertMany([
     "images": ["/assets/1.jpg", "/assets/2.jpg", "/assets/3.jpg"],
     "rating": 4.5,
     "madeFrom": "Rose, Jasmine, Sweet Notes",
-    "category": "Perfume",
+    "collections":2,
     "brand": "Sweet Bloom"
   },
   {
@@ -95,7 +95,7 @@ db.products.insertMany([
     "images": ["/assets/4.jpg", "/assets/5.jpg", "/assets/6.jpg"],
     "rating": 4.6,
     "madeFrom": "Cinnamon, Clove, Nutmeg",
-    "category": "Perfume",
+    "collections":3,
     "brand": "Spicy Essence"
   },
   {
@@ -106,7 +106,7 @@ db.products.insertMany([
     "images": ["/assets/7.jpg", "/assets/8.jpg", "/assets/9.jpg"],
     "rating": 4.4,
     "madeFrom": "Citrus, Mint",
-    "category": "Perfume",
+    "collections":4,
     "brand": "Breeze Co."
   }
 ]

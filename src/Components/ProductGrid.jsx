@@ -96,7 +96,7 @@ const ProductGrid = ({ products }) => {
                 </p>
                 <div className="flex justify-between items-center">
                   <p className="text-purple-700 font-bold text-lg">
-                    ${product.price.toFixed(2)}
+                    ₹{product.price.toFixed(2)}
                   </p>
                   <span className="text-sm text-gray-500">{product.brand}</span>
                 </div>

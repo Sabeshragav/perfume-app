@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { motion } from 'framer-motion';
-import { Star, Share2, ShoppingBag, Heart } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useContext } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { motion } from "framer-motion";
+import { Star, Share2, ShoppingBag, Heart } from "lucide-react";
 
-import Header from '../Components/Header';
-import ReviewForm from '../Components/ReviewForm';
-import Footer from '../Components/Footer';
-import { CartContext } from '../context/CartContext';
+import ReviewForm from "../Components/ReviewForm";
+import { CartContext } from "../context/CartContext";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -50,7 +48,7 @@ const ProductPage = () => {
   const handleAddToCart = () => {
     addToCart(product);
     // You can add a notification or feedback here
-    console.log('Added to cart:', product);
+    console.log("Added to cart:", product);
   };
 
   const handleToggleWishlist = () => {
@@ -73,7 +71,6 @@ const ProductPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Header />
       <main className="container mx-auto py-10 px-4 flex-grow">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -108,8 +105,8 @@ const ProductPage = () => {
                   alt={`${product.name} ${index + 1}`}
                   className={`w-20 h-20 object-cover rounded-md cursor-pointer transition-opacity ${
                     index === activeImage
-                      ? 'border-2 border-purple-500'
-                      : 'opacity-60 hover:opacity-100'
+                      ? "border-2 border-purple-500"
+                      : "opacity-60 hover:opacity-100"
                   }`}
                   onClick={() => setActiveImage(index)}
                 />
@@ -127,8 +124,8 @@ const ProductPage = () => {
                     key={i}
                     className={`w-5 h-5 ${
                       i < Math.round(product.rating)
-                        ? 'text-yellow-400'
-                        : 'text-gray-300'
+                        ? "text-yellow-400"
+                        : "text-gray-300"
                     }`}
                     fill="currentColor"
                   />
@@ -139,7 +136,7 @@ const ProductPage = () => {
               </span>
             </div>
             <p className="text-2xl font-bold text-purple-600">
-              ${product.price.toFixed(2)}
+              ₹{product.price.toFixed(2)}
             </p>
             <div>
               <p className="text-gray-700 mb-2">
@@ -148,15 +145,18 @@ const ProductPage = () => {
               {product.description.length > 150 && (
                 <button
                   className="text-purple-600 hover:text-purple-800 transition-colors"
-                  onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
+                  onClick={() =>
+                    setIsDescriptionExpanded(!isDescriptionExpanded)
+                  }
                 >
-                  {isDescriptionExpanded ? 'Read less' : 'Read more'}
+                  {isDescriptionExpanded ? "Read less" : "Read more"}
                 </button>
               )}
             </div>
             <div className="space-y-2">
               <p className="text-gray-700">
-                <span className="font-semibold">Made from:</span> {product.madeFrom}
+                <span className="font-semibold">Made from:</span>{" "}
+                {product.madeFrom}
               </p>
               <p className="text-gray-700">
                 <span className="font-semibold">Brand:</span> {product.brand}
@@ -176,11 +176,16 @@ const ProductPage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`p-3 rounded-full ${
-                  isWishlisted ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-600'
+                  isWishlisted
+                    ? "bg-red-500 text-white"
+                    : "bg-gray-200 text-gray-600"
                 }`}
                 onClick={handleToggleWishlist}
               >
-                <Heart className="w-6 h-6" fill={isWishlisted ? 'currentColor' : 'none'} />
+                <Heart
+                  className="w-6 h-6"
+                  fill={isWishlisted ? "currentColor" : "none"}
+                />
               </motion.button>
             </div>
           </div>
@@ -189,7 +194,9 @@ const ProductPage = () => {
         {/* Reviews Section */}
         <section className="mt-16">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-bold text-gray-800">Customer Reviews</h2>
+            <h2 className="text-3xl font-bold text-gray-800">
+              Customer Reviews
+            </h2>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -216,13 +223,17 @@ const ProductPage = () => {
                       </span>
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-800">{review.username}</p>
+                      <p className="font-semibold text-gray-800">
+                        {review.username}
+                      </p>
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
                             className={`w-4 h-4 ${
-                              i < review.rating ? 'text-yellow-400' : 'text-gray-300'
+                              i < review.rating
+                                ? "text-yellow-400"
+                                : "text-gray-300"
                             }`}
                             fill="currentColor"
                           />
@@ -249,10 +260,8 @@ const ProductPage = () => {
           />
         )}
       </main>
-      <Footer />
     </div>
   );
 };
 
 export default ProductPage;
-

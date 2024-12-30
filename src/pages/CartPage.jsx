@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Trash2, Plus, Minus } from 'lucide-react';
-import { CartContext } from '../context/CartContext';
-import Header from '../Components/Header';
-import Footer from '../Components/Footer';
-
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Trash2, Plus, Minus } from "lucide-react";
+import { CartContext } from "../context/CartContext";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const newTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const newTotal = cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
     setTotal(newTotal);
   }, [cartItems]);
 
@@ -26,7 +26,6 @@ const CartPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Header />
       <main className="container mx-auto py-10 px-4 flex-grow">
         <h1 className="text-3xl font-bold text-gray-800 mb-8">Your Cart</h1>
         {cartItems.length > 0 ? (
@@ -40,10 +39,18 @@ const CartPage = () => {
                   exit={{ opacity: 0, y: -20 }}
                   className="bg-white p-6 rounded-lg shadow-md mb-4 flex items-center"
                 >
-                  <img src={item.images[0]} alt={item.name} className="w-20 h-20 object-cover rounded-md mr-4" />
+                  <img
+                    src={item.images[0]}
+                    alt={item.name}
+                    className="w-20 h-20 object-cover rounded-md mr-4"
+                  />
                   <div className="flex-grow">
-                    <h2 className="text-lg font-semibold text-gray-800">{item.name}</h2>
-                    <p className="text-purple-600 font-bold">${item.price.toFixed(2)}</p>
+                    <h2 className="text-lg font-semibold text-gray-800">
+                      {item.name}
+                    </h2>
+                    <p className="text-purple-600 font-bold">
+                      ₹{item.price.toFixed(2)}
+                    </p>
                   </div>
                   <div className="flex items-center space-x-2">
                     <button
@@ -75,18 +82,20 @@ const CartPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-white p-6 rounded-lg shadow-md"
               >
-                <h2 className="text-xl font-bold text-gray-800 mb-4">Order Summary</h2>
+                <h2 className="text-xl font-bold text-gray-800 mb-4">
+                  Order Summary
+                </h2>
                 <div className="flex justify-between mb-2">
                   <span>Subtotal:</span>
-                  <span>${total.toFixed(2)}</span>
+                  <span>₹{total.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between mb-2">
                   <span>Shipping:</span>
-                  <span>$5.99</span>
+                  <span>₹5.99</span>
                 </div>
                 <div className="flex justify-between font-bold text-lg mt-4">
                   <span>Total:</span>
-                  <span>${(total + 5.99).toFixed(2)}</span>
+                  <span>₹{(total + 5.99).toFixed(2)}</span>
                 </div>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -110,10 +119,8 @@ const CartPage = () => {
           </div>
         )}
       </main>
-      <Footer />
     </div>
   );
 };
 
 export default CartPage;
-
