@@ -36,6 +36,7 @@ const Collections = () => {
         processProducts(response.data);
       })
       .catch((error) => console.error("Error fetching products:", error));
+      // eslint-disable-next-line
   }, []);
 
   return (
