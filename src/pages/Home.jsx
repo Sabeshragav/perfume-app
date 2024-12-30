@@ -3,8 +3,9 @@ import axios from "axios";
 import Header from "../Components/Header";
 import Banner from "../Components/Banner";
 import ProductGrid from "../Components/ProductGrid";
-import Footer from "../Components/Footer";
+
 import SwipeBanner from "../Components/SwipeBanner";
+import Footer from "../Components/Footer";
 
 const Home = () => {
   const [products, setProducts] = useState([]);

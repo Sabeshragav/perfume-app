@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Logo from "./Logo";
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { ShoppingBag, Menu, X } from 'lucide-react';
+import Logo from './Logo';
+import { CartContext } from '../context/CartContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { cartItems } = useContext(CartContext);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -21,7 +24,7 @@ const Header = () => {
             <nav className="hidden md:block ml-10">
               <ul className="flex items-baseline space-x-4">
                 <NavLink to="/">Home</NavLink>
-                <NavLink to="/collections">Collections</NavLink>
+                <NavLink to="/">Collections</NavLink>
                 <NavLink to="/about">About Us</NavLink>
                 <NavLink to="/contact">Contact</NavLink>
               </ul>
@@ -29,44 +32,24 @@ const Header = () => {
           </div>
           <div className="hidden md:flex items-center">
             <SearchBar />
-            <CartIcon />
+            <Link
+              to="/cart"
+              className="ml-4 text-white hover:text-purple-200 transition-colors relative"
+            >
+              <ShoppingBag className="w-6 h-6" />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartItems.length}
+                </span>
+              )}
+            </Link>
           </div>
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
               className="text-white hover:text-purple-200 focus:outline-none focus:ring-2 focus:ring-white"
             >
-              {isMenuOpen ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              )}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
@@ -94,44 +77,12 @@ const SearchBar = () => (
       placeholder="Search..."
       className="bg-purple-700 text-white placeholder-purple-300 rounded-full py-1 px-4 pr-10 focus:outline-none focus:ring-2 focus:ring-white"
     />
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-300"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-      />
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
     </svg>
   </div>
 );
 
-const CartIcon = () => (
-  <Link
-    to="/cart"
-    className="ml-4 text-white hover:text-purple-200 transition-colors"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-      />
-    </svg>
-  </Link>
-);
 
 const MobileMenu = () => (
   <div className="md:hidden">
@@ -143,23 +94,9 @@ const MobileMenu = () => (
     </nav>
     <div className="px-4 py-3">
       <SearchBar />
-      <Link
-        to="/cart"
-        className="mt-4 flex items-center text-white hover:text-purple-200 transition-colors"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 mr-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-          />
+      <Link to="/cart" className="mt-4 flex items-center text-white hover:text-purple-200 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
         </svg>
         <span>Cart</span>
       </Link>
@@ -177,3 +114,4 @@ const MobileNavLink = ({ to, children }) => (
 );
 
 export default Header;
+
