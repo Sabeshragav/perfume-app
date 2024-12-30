@@ -48,25 +48,27 @@ const Collections = () => {
           {collections.map((collection) => (
             <div
               key={collection.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
+              className="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
             >
-              <img
-                src={collection.image}
-                alt={`${collection.name} collection`}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-xl font-semibold text-purple-700 mb-2">
-                  {collection.name}
-                </h3>
-                <p className="text-purple-600">{collection.items} items</p>
-                <Link
-                  to={`/collections/${collection.id}`}
-                  className="mt-4 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition duration-300 inline-block"
-                >
-                  View Collection
-                </Link>
-              </div>
+              <Link to={`/collections/${collection.id}`}>
+                <img
+                  src={collection.image}
+                  alt={`${collection.name} collection`}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-xl font-semibold text-purple-700 mb-2">
+                    {collection.name}
+                  </h3>
+                  <p className="text-purple-600">{collection.items} items</p>
+                  <div
+                    to={`/collections/${collection.id}`}
+                    className="mt-4 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition duration-300 inline-block"
+                  >
+                    View Collection
+                  </div>
+                </div>
+              </Link>
             </div>
           ))}
         </div>
