@@ -11,6 +11,7 @@ import Header from "./Components/Header";
 import About from "./Components/About";
 import Collections from "./Components/Collections";
 import Footer from "./Components/Footer";
+import CollectionItems from "./pages/CollectionItems";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,6 +23,7 @@ root.render(
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/collections" element={<Collections />} />
+          <Route path="/collections/:id" element={<CollectionItems />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<CartPage />} />

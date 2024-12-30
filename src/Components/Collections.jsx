@@ -1,18 +1,19 @@
 import axios from "axios";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Collections = () => {
   const [collections, setCollections] = useState([]);
 
-  const processProducts = useCallback((products) => {
-    const collectionsData = [
-      { id: 0, name: "Summer Breeze", image: "/assets/17.jpg" },
-      { id: 1, name: "Autumn Whispers", image: "/assets/16.jpg" },
-      { id: 2, name: "Winter Frost", image: "/assets/15.jpg" },
-      { id: 3, name: "Spring Bloom", image: "/assets/14.jpg" },
-      { id: 4, name: "Travel Desire", image: "/assets/13.jpg" },
-    ];
+  const collectionsData = [
+    { id: 0, name: "Summer Breeze", image: "/assets/17.jpg" },
+    { id: 1, name: "Autumn Whispers", image: "/assets/16.jpg" },
+    { id: 2, name: "Winter Frost", image: "/assets/15.jpg" },
+    { id: 3, name: "Spring Bloom", image: "/assets/14.jpg" },
+    { id: 4, name: "Travel Desire", image: "/assets/13.jpg" },
+  ];
 
+  const processProducts = (products) => {
     const updatedCollections = collectionsData.map((collection) => {
       const collectionProducts = products.filter(
         (product) => product.collections === collection.id
@@ -26,7 +27,7 @@ const Collections = () => {
     setCollections(
       updatedCollections.filter((collection) => collection.items > 0)
     );
-  }, []); // No external dependencies now
+  };
 
   useEffect(() => {
     axios
@@ -35,7 +36,7 @@ const Collections = () => {
         processProducts(response.data);
       })
       .catch((error) => console.error("Error fetching products:", error));
-  }, [processProducts]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-purple-50 flex flex-col">
@@ -59,9 +60,12 @@ const Collections = () => {
                   {collection.name}
                 </h3>
                 <p className="text-purple-600">{collection.items} items</p>
-                <button className="mt-4 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition duration-300">
+                <Link
+                  to={`/collections/${collection.id}`}
+                  className="mt-4 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition duration-300 inline-block"
+                >
                   View Collection
-                </button>
+                </Link>
               </div>
             </div>
           ))}
