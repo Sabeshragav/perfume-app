@@ -17,6 +17,7 @@ const CartPage = () => {
   }, [cartItems]);
 
   const handleQuantityChange = (id, change) => {
+    // Ensure that we only update the quantity of the specific item
     updateQuantity(id, change);
   };
 
@@ -85,9 +86,16 @@ const CartPage = () => {
                 <h2 className="text-xl font-bold text-gray-800 mb-4">
                   Order Summary
                 </h2>
-                <div className="flex justify-between mb-2">
-                  <span>Subtotal:</span>
-                  <span>₹{total.toFixed(2)}</span>
+                <div className="space-y-4">
+                  {cartItems.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex justify-between mb-2 border-b pb-2"
+                    >
+                      <span>{item.name} ({item.quantity})</span>
+                      <span>₹{(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                  ))}
                 </div>
                 <div className="flex justify-between mb-2">
                   <span>Shipping:</span>
